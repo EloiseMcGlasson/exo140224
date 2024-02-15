@@ -1,42 +1,55 @@
 
 
 
-function askNumber(){
-    let givenNumber =101
-    while (givenNumber> 50 || givenNumber< 0) {
-    givenNumber = prompt("Choisissez un nombre entre 0 et 50 :")
+function askNumber(nbPetit, nbGrand){
+    let givenNumber =-1
+    while (givenNumber> nbGrand || givenNumber< nbPetit) {
+    givenNumber = prompt("Choisissez un nombre entre " + nbPetit + "< ? <" + nbGrand + " :")
     
     }
     return givenNumber
 }
 
 function didIWin(nombreADeviner){
-    
-    let givenNumber = askNumber()
+    let nbTentative = 0
+    let nbPetit = 0
+    let nbGrand = 50
+   
+    let givenNumber = askNumber(nbPetit,nbGrand)
     while (givenNumber!=nombreADeviner){
         if (givenNumber>nombreADeviner){
+            nbTentative++
+            if (givenNumber<nbGrand){
+                nbGrand = givenNumber}
             console.log("Plus petit")
             alert("Faux réessaie")
-            givenNumber=askNumber()
+            givenNumber=askNumber(nbPetit,nbGrand)
         } else {
+            nbTentative++
+            if (givenNumber>nbPetit){
+                nbPetit = givenNumber}
+           
             console.log("Plus grand")
             alert("Faux réessaie")
-            givenNumber=askNumber()
+            givenNumber=askNumber(nbPetit,nbGrand)
         }
        
     }
-    alert("Bravo tu as trouvé le bon nombre !")
+    nbTentative++
+    alert("Bravo tu as trouvé le bon nombre en " + nbTentative + " tentative(s) !")
     console.log("bravo") 
 
 }
 
 function gamePlay(){
-    const nombreADeviner = askNumber()
+    let nbPetit = 0
+    let nbGrand = 50
+    const nombreADeviner = askNumber(nbPetit,nbGrand)
     console.log("nombre à deviner :" + nombreADeviner)
     
     //console.log("givenNumber:" + givenNumber)
     didIWin(nombreADeviner)
 
 
-
+    
 }
